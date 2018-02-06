@@ -9,9 +9,10 @@ from django.http import HttpResponse
 def index(request):
 
     category_list = Category.objects.order_by('-likes')[:5]
-    context_dict = {'categories': category_list}
+    page_list = Page.objects.order_by('views')[:5]
+    context_dict = {'categories': category_list, 'pages' : page_list}
     
-    return render(request, 'rango/index.html', context_dict)
+    return render(request, 'rango/index.html', context_dict, page_list)
 
 def about(request):
 
@@ -35,3 +36,5 @@ def show_category(request, category_name_slug):
 
     return render(request, 'rango/category.html', context_dict)
 
+def show_page(request):
+    return render(request, 'rango/page.html')

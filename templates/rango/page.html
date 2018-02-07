@@ -5,10 +5,21 @@
 </head>
 <body>
     <div>
-        <h1>{{ title }}</h1>
+        {% if page %}
+        <h1>{{ page.title }}</h1>
+        {% if pages %}
         <ul>
-            Views : {{views}}
+            {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endfor %}
         </ul>
+        {% else %}
+        <strong>No pages currently in category.</strong>
+        {% endif %}
+        {% else %}
+        The specified category does not exist!
+        {% endif %}
+
     </div>
 
 </body>

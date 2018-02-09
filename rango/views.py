@@ -7,13 +7,18 @@ from rango.forms import CategoryForm, PageForm
 
 from django.http import HttpResponse
 
+
 def index(request):
 
     category_list = Category.objects.order_by('-likes')[:5]
-    page_list = Page.objects.order_by('views')[:5]
-    context_dict = {'categories': category_list, 'pages' : page_list}
-    
-    return render(request, 'rango/index.html', context_dict, page_list)
+
+    page_list = Page.objects.order_by('-views')[:5]
+
+    context_dict = {'categories': category_list, 'pages': page_list}
+
+    response = render(request, 'rango/index.html', context=context_dict)
+
+    return response
 
 def about(request):
 
